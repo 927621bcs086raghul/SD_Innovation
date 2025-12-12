@@ -246,10 +246,13 @@
   font-size: 13px;
   color: #9db8a8;
 }
-@media (min-width: 320px) {
+@media (min-width: 320px) and (max-width: 439px) {
 .movies-header-inner{
     flex-wrap: nowrap;
     flex-direction: column;
+}
+.movies-header{
+  padding:0px 10px;
 }
 }
 
