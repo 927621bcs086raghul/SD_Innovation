@@ -69,6 +69,11 @@
 .fav-movies-logo-icon::after {
   top: 15px;
 }
-.movies-main-inner .ant-typography {
+.fav-movies-main-inner {
+  width: 100%;
+  max-width: 1440px;
+}
+
+.fav-movies-main-inner .ant-typography {
   color: #ffffff !important;
 }
