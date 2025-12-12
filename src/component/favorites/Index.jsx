@@ -1,47 +1,68 @@
-import { Layout, List, Typography } from 'antd';
+import { Button, Layout, Typography } from 'antd';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import '../home/Index.css';
+import { Link, useNavigate } from 'react-router-dom';
+import './Index.css';
 
 const { Header, Content } = Layout;
 const { Title, Text } = Typography;
 
 function Favorites() {
   const favorites = useSelector((state) => state.favorites.items);
+  const navigate = useNavigate();
 
   return (
-    <Layout className="movies-page-root">
-      <Header className="movies-header">
-        <div className="movies-header-inner">
-          <div className="movies-header-left">
-            <div className="movies-logo">
-              <div className="movies-logo-icon" />
-              <Title level={4} className="movies-logo-title">
-                My Favorites
+    <Layout className="fav-movies-page-root">
+      <Header className="fav-movies-header">
+        <div className="fav-movies-header-inner">
+          <div className="fav-movies-header-left">
+            <div className="fav-movies-logo">
+              <div className="fav-movies-logo-icon" />
+              <Title level={4} className="fav-movies-logo-title">
+                MovieStream
               </Title>
             </div>
           </div>
+          <Button
+            type="default"
+            className="back-nav-btn"
+            onClick={() => navigate(-1)}
+          >
+            Back
+          </Button>
         </div>
       </Header>
 
       <Content className="movies-main">
         <div className="movies-main-inner">
           <Title level={2} className="movies-page-title">
-            Saved Movies
+            My Favorites
           </Title>
+
           {favorites.length === 0 ? (
             <Text type="secondary">You have no favorites yet.</Text>
           ) : (
-            <List
-              dataSource={favorites}
-              renderItem={(movie) => (
-                <List.Item>
-                  <Link to={`/movie/${movie.id}`}>
-                    {movie.title}
-                  </Link>
-                </List.Item>
-              )}
-            />
+            <div className="movies-grid">
+              {favorites.map((movie) => (
+                <article key={movie.id} className="movies-card">
+                  <div className="movies-card-poster">
+                    <Link to={`/movie/${movie.id}`}>
+                      <img
+                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                        alt={movie.title}
+                      />
+                    </Link>
+                  </div>
+                  <div className="movies-card-body">
+                    <h3 className="movies-card-title">{movie.title}</h3>
+                    <p className="movies-card-meta">
+                      {movie.release_date
+                        ? new Date(movie.release_date).getFullYear()
+                        : 'N/A'}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
           )}
         </div>
       </Content>

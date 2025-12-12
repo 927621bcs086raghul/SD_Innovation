@@ -12,12 +12,14 @@ const { Title, Text } = Typography
 function Index() {
 	const dispatch = useDispatch();
 
-  const { popularMovies, loading } = useSelector((state) => state.home);
+  const { popularMovies, loading, page, totalPages } = useSelector((state) => state.home);
   console.log('Popular Movies:', popularMovies);
 
   useEffect(() => {
-    dispatch(fetchPopularMoviesStart());
-  }, []);
+    if (popularMovies.length === 0) {
+      dispatch(fetchPopularMoviesStart(1));
+    }
+  }, [dispatch]);
 
   return (
     <Layout className="movies-page-root">
@@ -30,6 +32,11 @@ function Index() {
                 MovieStream
               </Title>
             </div>
+          </div>
+          <div>
+            <Link to="/favorites" className="movies-header-link">
+              My List
+            </Link>
           </div>
         </div>
       </Header>
@@ -93,6 +100,28 @@ function Index() {
                   </article>
                 ))}
           </div>
+
+          {!loading && popularMovies.length > 0 && (
+            <div className="movies-pagination-wrapper">
+              <button
+                className="movies-page-button"
+                disabled={page <= 1}
+                onClick={() => dispatch(fetchPopularMoviesStart(page - 1))}
+              >
+                Prev
+              </button>
+              <span className="movies-page-info">
+                {page} / {totalPages}
+              </span>
+              <button
+                className="movies-page-button"
+                disabled={page >= totalPages}
+                onClick={() => dispatch(fetchPopularMoviesStart(page + 1))}
+              >
+                Next
+              </button>
+            </div>
+          )}
         </div>
       </Content>
 

@@ -17,7 +17,13 @@ API.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-export const fetchPopularMoviesApi = () => API.get('/movie/popular');
+export const fetchPopularMoviesApi = (page = 1) =>
+  API.get('/movie/popular', {
+    params: {
+      language: 'en-US',
+      page,
+    },
+  });
 
 export const fetchMovieDetailApi = (movieId) => API.get(`/movie/${movieId}`);
 
