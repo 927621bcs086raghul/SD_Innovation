@@ -17,7 +17,6 @@ const homeSlice = createSlice({
     },
     fetchPopularMoviesSuccess(state, action) {
       state.loading = false;
-      // TMDB returns { results: [...] }
       state.popularMovies = action.payload;
     },
     fetchPopularMoviesFailure(state, action) {
