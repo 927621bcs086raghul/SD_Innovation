@@ -33,7 +33,7 @@ function Favorites() {
       </Header>
 
       <Content className="movies-main">
-        <div className="movies-main-inner">
+        <div className="fav-movies-main-inner">
           <Title level={2} className="movies-page-title">
             My Favorites
           </Title>
