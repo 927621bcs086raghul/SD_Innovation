@@ -27,3 +27,13 @@ export const fetchPopularMoviesApi = (page = 1) =>
 
 export const fetchMovieDetailApi = (movieId) => API.get(`/movie/${movieId}`);
 
+export const fetchSearchMoviesApi = (query, page = 1) =>
+  API.get('/search/movie', {
+    params: {
+      query,
+      language: 'en-US',
+      page,
+      include_adult: false,
+    },
+  });
+

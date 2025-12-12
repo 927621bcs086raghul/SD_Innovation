@@ -246,6 +246,12 @@
   font-size: 13px;
   color: #9db8a8;
 }
+@media (min-width: 320px) {
+.movies-header-inner{
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
+}
 
 @media (min-width: 640px) {
   .movies-grid {

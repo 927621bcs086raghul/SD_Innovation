@@ -1,9 +1,10 @@
 import { SearchOutlined, StarFilled } from '@ant-design/icons';
 import { Input, Layout, Skeleton, Typography } from 'antd';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchPopularMoviesStart } from './homeSlice';
+import { useDebounce } from '../../hook/debounce';
+import { fetchPopularMoviesStart, fetchSearchMoviesStart } from './homeSlice';
 import './Index.css';
 const { Header, Content, Footer } = Layout
 const { Title, Text } = Typography
@@ -15,11 +16,19 @@ function Index() {
   const { popularMovies, loading, page, totalPages } = useSelector((state) => state.home);
   console.log('Popular Movies:', popularMovies);
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
   useEffect(() => {
-    if (popularMovies.length === 0) {
+    const trimmed = debouncedSearchTerm.trim();
+    if (trimmed) {
+      dispatch(fetchSearchMoviesStart({ query: trimmed, page: 1 }));
+    } else {
       dispatch(fetchPopularMoviesStart(1));
     }
-  }, [dispatch]);
+  }, [debouncedSearchTerm, dispatch]);
+
+  const isSearching = debouncedSearchTerm.trim().length > 0;
 
   return (
     <Layout className="movies-page-root">
@@ -52,6 +61,8 @@ function Index() {
                 prefix={<SearchOutlined />}
                 placeholder="Search movies, series..."
                 className="movies-search-input"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
           </div>
@@ -101,7 +112,7 @@ function Index() {
                 ))}
           </div>
 
-          {!loading && popularMovies.length > 0 && (
+          {!loading && !isSearching && popularMovies.length > 0 && (
             <div className="movies-pagination-wrapper">
               <button
                 className="movies-page-button"
