@@ -1,0 +1,154 @@
+.movie-detail-page {
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #1afa7b11, transparent 60%), #0f1511;
+  color: #ffffff;
+  font-family: "Spline Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.movie-detail-main {
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px 48px;
+}
+
+.movie-detail-inner {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  gap: 32px;
+}
+
+.movie-detail-poster-wrap {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65);
+}
+
+.movie-detail-poster-wrap img {
+  width: 100%;
+  display: block;
+}
+
+.movie-detail-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.movie-detail-title-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.movie-detail-title-row .ant-typography {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff !important;
+
+}
+.back-nav-btn{
+        background-color: #478047;
+    border: none;
+}
+.back-nav-btn:hover{
+    background-color:  #92d592 !important;
+    border: none !important;
+    color: #29382f !important;
+}
+
+.movie-detail-year {
+  font-size: 18px;
+  color: #9db8a8;
+}
+
+.movie-detail-tagline {
+  font-size: 16px;
+  color: #9db8a8;
+}
+
+.movie-detail-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.movie-detail-chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: #1b2a21;
+  border: 1px solid #29382f;
+  font-size: 12px;
+  color: #d1f5e3;
+}
+
+.movie-detail-overview {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #e5f4ec;
+}
+
+.movie-detail-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.movie-detail-info-item {
+  padding: 8px 10px;
+  border-radius: 12px;
+  background-color: #151f19;
+  border: 1px solid #26352c;
+}
+
+.movie-detail-info-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #9db8a8;
+}
+
+.movie-detail-info-value {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.movie-detail-rating-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #1b2a21;
+}
+
+.movie-detail-rating-score {
+  font-size: 14px;
+  font-weight: 700;
+  color: #30e87a;
+}
+
+.movie-detail-rating-count {
+  font-size: 12px;
+  color: #9db8a8;
+}
+
+.movie-detail-backdrop {
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-detail-backdrop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(0, 0, 0, 0.7), transparent 65%);
+}
+
+@media (max-width: 768px) {
+  .movie-detail-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

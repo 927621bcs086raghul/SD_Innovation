@@ -2,6 +2,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import { Input, Layout, Skeleton, Typography } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchPopularMoviesStart } from './homeSlice';
 import './Index.css';
 const { Header, Content, Footer } = Layout
@@ -50,7 +51,7 @@ function Index() {
 
           <div className="movies-grid">
             {loading
-              ? Array.from({ length: 8 }).map((_, index) => (
+                ? Array.from({ length: 8 }).map((_, index) => (
                   <article key={index} className="movies-card">
                     <div className="movies-card-poster">
                       <Skeleton avatar  active style={{ width: '100%', height: '100%' }} />
@@ -68,10 +69,12 @@ function Index() {
               : popularMovies.map((movie) => (
                   <article key={movie.id} className="movies-card">
                     <div className="movies-card-poster">
-                      <img
-                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                        alt={movie.title}
-                      />
+                      <Link to={`/movie/${movie.id}`}>
+                        <img
+                          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                          alt={movie.title}
+                        />
+                      </Link>
                     </div>
                     <div className="movies-card-body">
                       <h3 className="movies-card-title">{movie.title}</h3>

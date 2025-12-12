@@ -19,3 +19,5 @@ API.interceptors.request.use(
 
 export const fetchPopularMoviesApi = () => API.get('/movie/popular');
 
+export const fetchMovieDetailApi = (movieId) => API.get(`/movie/${movieId}`);
+
