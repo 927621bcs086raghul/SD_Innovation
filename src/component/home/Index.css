@@ -159,6 +159,30 @@
   pointer-events: none;
 }
 
+.movies-card-rating {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.movies-card-rating-icon {
+  font-size: 14px;
+  color: #facc15;
+}
+
+.movies-card-rating-text {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
 .movies-card-body {
   display: flex;
   flex-direction: column;

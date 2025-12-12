@@ -17,4 +17,16 @@ const store = configureStore({
 
 sagaMiddleware.run(rootSaga);
 
+if (typeof window !== 'undefined') {
+  store.subscribe(() => {
+    try {
+      const state = store.getState();
+      const favorites = state.favorites?.items ?? [];
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+    } catch (e) {
+      console.error('Failed to save favorites to localStorage', e);
+    }
+  });
+}
+
 export default store;

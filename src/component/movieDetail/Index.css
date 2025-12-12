@@ -28,6 +28,7 @@
 .movie-detail-poster-wrap img {
   width: 100%;
   display: block;
+      height: -webkit-fill-available;
 }
 
 .movie-detail-meta {
@@ -146,7 +147,15 @@
   inset: 0;
   background: radial-gradient(circle at top, rgba(0, 0, 0, 0.7), transparent 65%);
 }
-
+.add-to-favorite-btn{
+        background-color: #71a790 !important;
+    border: none;
+}
+.add-to-favorite-btn:hover{
+    background-color:  #92d592 !important;
+    border: none !important;
+    color: #29382f !important;
+}
 @media (max-width: 768px) {
   .movie-detail-inner {
     grid-template-columns: minmax(0, 1fr);

@@ -2,6 +2,7 @@ import { Button, Layout, Skeleton, Typography } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { addFavorite, removeFavorite } from '../favorites/favoritesSlice';
 import './Index.css';
 import { fetchMovieDetailStart } from './movieDetailSlice';
 
@@ -13,12 +14,24 @@ function MovieDetail() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { movie, loading, error } = useSelector((state) => state.movieDetail);
+  const favorites = useSelector((state) => state.favorites.items);
+
+  const isFavorite = movie && favorites.some((fav) => fav.id === movie.id);
 
   useEffect(() => {
     if (id) {
       dispatch(fetchMovieDetailStart(id));
     }
-  }, [ id]);
+  }, [dispatch, id]);
+
+  const handleToggleFavorite = () => {
+    if (!movie) return;
+    if (isFavorite) {
+      dispatch(removeFavorite(movie.id));
+    } else {
+      dispatch(addFavorite(movie));
+    }
+  };
 
   const year = movie?.release_date ? new Date(movie.release_date).getFullYear() : null;
 
@@ -34,9 +47,14 @@ function MovieDetail() {
               </Title>
             </div>
           </div>
-          <Button type="default" className='back-nav-btn' onClick={() => navigate(-1)}>
-            Back
-          </Button>
+          <div style={{ display: 'flex', gap: 12 }}>
+            <Button type={isFavorite ? 'primary' : 'default'} className='add-to-favorite-btn' onClick={handleToggleFavorite}>
+              {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+            </Button>
+            <Button type="default" className="back-nav-btn" onClick={() => navigate(-1)}>
+              Back
+            </Button>
+          </div>
         </div>
       </Header>
 

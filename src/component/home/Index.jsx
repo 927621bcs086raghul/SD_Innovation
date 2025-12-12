@@ -1,4 +1,4 @@
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined, StarFilled } from '@ant-design/icons';
 import { Input, Layout, Skeleton, Typography } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -69,6 +69,12 @@ function Index() {
               : popularMovies.map((movie) => (
                   <article key={movie.id} className="movies-card">
                     <div className="movies-card-poster">
+                      <div className="movies-card-rating">
+                        <StarFilled className="movies-card-rating-icon" />
+                        <span className="movies-card-rating-text">
+                          {(movie.vote_average / 2).toFixed(1)}
+                        </span>
+                      </div>
                       <Link to={`/movie/${movie.id}`}>
                         <img
                           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
